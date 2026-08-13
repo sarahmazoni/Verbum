@@ -89,8 +89,8 @@ Os documentos de requisitos e escopo fornecidos para o Projeto Integrador estão
 ## Equipe
 
 * Sarah
-* Integrante 2
-* Integrante 3
+* Henrique
+* Gabriel
 
 ## Status
 

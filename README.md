@@ -14,12 +14,9 @@ O projeto tem como objetivo disponibilizar uma plataforma que organize o aprendi
 * Autenticação em dois fatores (2FA)
 * Recuperação e alteração de senha
 * Gerenciamento de perfil
-* Seleção do idioma estudado
+* Seleção do idioma estudado(ingles)
 * Vocabulário de alta frequência
-* Conteúdos de gramática
 * Chunks e expressões frequentes
-* Cognatos e falsos cognatos
-* Acompanhamento do progresso
 * Histórico de estudos
 * Gerenciamento de consentimento
 * Consulta, exportação e exclusão de dados pessoais

@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrar | VERBUM</title>
+  <link rel="stylesheet" href="{% static 'css/verbum.css' %}">
+</head>
+<body>
+  <main class="login-layout">
+    <section class="welcome">
+      <a class="logo logo-light" href="#"> VERBUM</a>
+      <div>
+        <p class="tag">APRENDA NO SEU RITMO</p>
+        <h1>Palavras que viram conversas.</h1>
+        <p>Pratique inglês com vocabulário útil, chunks e uma rotina leve de estudos.</p>
+      </div>
+      <small>Uma palavra por vez. Um pouco melhor a cada dia.</small>
+    </section>
+
+    <section class="login-area">
+      <form class="login-card" method="post">
+        {% csrf_token %}
+        <p class="tag">BEM-VINDO DE VOLTA</p>
+        <h2>Acesse sua conta</h2>
+        <p class="subtext">Continue de onde parou.</p>
+
+        {% if messages %}
+          {% for message in messages %}<p class="message">{{ message }}</p>{% endfor %}
+        {% endif %}
+
+        <label for="email">E-mail</label>
+        <input id="email" name="email" type="email" autocomplete="email" placeholder="seuemail@exemplo.com" required>
+
+        <div class="label-row">
+          <label for="password">Senha</label>
+          <a href="">Esqueci minha senha</a>
+        </div>
+        <div class="password-field">
+          <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Digite sua senha" required>
+          <button id="toggle-password" type="button">Mostrar</button>
+        </div>
+
+        <button class="button-primary" type="submit">Entrar</button>
+        <p class="register">Ainda não tem conta? <a href="">Cadastre-se</a></p>
+      </form>
+    </section>
+  </main>
+  <script src="{% static 'js/verbum.js' %}"></script>
+</body>
+</html>

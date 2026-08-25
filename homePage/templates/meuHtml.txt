@@ -1,9 +1,0 @@
-<!DOCTYPE html>
-<html>
-<body>
-
-<h1>HTML está funcionando agora!</h1>
-<p>E também as requisições HTTP!</p>
-
-</body>
-</html>

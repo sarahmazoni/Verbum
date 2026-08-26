@@ -95,3 +95,145 @@ input:focus { border-color: var(--purple); box-shadow: 0 0 0 4px #eef2ff; }
 }
 
 @media (max-width: 520px) { .stats { grid-template-columns: 1fr; } }
+
+:root {
+  --purple: #7dd3fc;
+  --purple-dark: #0c4a6e;
+  --purple-light: #e0f2fe;
+}
+
+/* Lado esquerdo */
+
+.welcome {
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(125, 211, 252, 0.22),
+      transparent 38%
+    ),
+    linear-gradient(145deg, #0f172a, #172554 60%, #075985);
+}
+
+.logo-light span {
+  color: #0f172a;
+  background: #7dd3fc;
+}
+
+.welcome .tag {
+  color: #7dd3fc;
+}
+
+.welcome p:not(.tag) {
+  color: #dbeafe;
+}
+
+.welcome small {
+  color: #bae6fd;
+}
+
+/* Lado direito */
+
+.login-area {
+  padding: 32px;
+  background:
+    radial-gradient(
+      circle at bottom right,
+      rgba(125, 211, 252, 0.12),
+      transparent 35%
+    ),
+    #0f172a;
+}
+
+/* Card do login */
+
+.login-card {
+  width: min(100%, 430px);
+  padding: 42px;
+  border: 1px solid rgba(125, 211, 252, 0.2);
+  border-radius: 24px;
+  background: #1e293b;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.login-card h2 {
+  color: #f8fafc;
+}
+
+.login-card .tag {
+  color: #7dd3fc;
+}
+
+.login-card .subtext {
+  color: #94a3b8;
+}
+
+.login-card label {
+  color: #e2e8f0;
+}
+
+/* Campos */
+
+.login-card input {
+  border: 2px solid transparent;
+  background: #334155;
+  color: #f8fafc;
+}
+
+.login-card input::placeholder {
+  color: #94a3b8;
+}
+
+.login-card input:focus {
+  border-color: #7dd3fc;
+  box-shadow: 0 0 0 4px rgba(125, 211, 252, 0.14);
+}
+
+.login-card a {
+  color: #7dd3fc;
+}
+
+.password-field button {
+  color: #7dd3fc;
+}
+
+/* Botão entrar */
+
+.login-card .button-primary {
+  color: #0f172a;
+  background: #7dd3fc;
+  letter-spacing: 1.5px;
+  transition:
+    background 0.2s,
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.login-card .button-primary:hover {
+  background: #bae6fd;
+  box-shadow: 0 10px 25px rgba(125, 211, 252, 0.22);
+  transform: translateY(-2px);
+}
+
+.login-card .button-primary:active {
+  transform: translateY(0);
+}
+
+.login-card .register {
+  color: #cbd5e1;
+}
+
+/* Mensagens do Django */
+
+.login-card .message {
+  color: #dbeafe;
+  border-left: 4px solid #7dd3fc;
+  background: rgba(125, 211, 252, 0.12);
+}
+
+/* Ajuste para telas menores */
+
+@media (max-width: 800px) {
+  .login-card {
+    padding: 32px 26px;
+  }
+}

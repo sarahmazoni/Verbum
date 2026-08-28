@@ -14,3 +14,9 @@ Antes da realização dos testes funcionais, foi realizada a verificação do pr
 
 ```bash
 py manage.py check
+
+System check identified no issues (0 silenced).
+
+py manage.py runserver}
+
+http://127.0.0.1:8000/

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Configurar 2FA</title>
+</head>
+ 
+<body>
+ 
+    <h1>Configurar autenticação em dois fatores</h1>
+ 
+    {% if messages %}
+        {% for message in messages %}
+<p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+ 
+    <h2>1. Configure seu aplicativo autenticador</h2>
+ 
+    <p>
+        Use seu aplicativo autenticador para adicionar uma nova conta.
+</p>
+ 
+    <p>
+        Serviço: <strong>Verbum</strong>
+</p>
+ 
+    <p>
+        E-mail: <strong>{{ request.user.email }}</strong>
+</p>
+ 
+    <p>
+        Secret:
+</p>
+ 
+    <strong>{{ secret }}</strong>
+ 
+    <h2>2. Confirme o código</h2>
+ 
+    <form method="post">
+ 
+        {% csrf_token %}
+ 
+        <label for="codigo">
+            Código de 6 dígitos:
+</label>
+ 
+        <input
+            id="codigo"
+            name="codigo"
+            type="text"
+            inputmode="numeric"
+            autocomplete="one-time-code"
+            maxlength="6"
+            required
+>
+ 
+        <button type="submit">
+            Ativar 2FA
+</button>
+ 
+    </form>
+ 
+</body>
+</html>

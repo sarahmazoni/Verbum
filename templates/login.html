@@ -30,6 +30,10 @@
           {% for message in messages %}<p class="message">{{ message }}</p>{% endfor %}
         {% endif %}
 
+	{% if error %}
+		<p class="message">{{ error }}</p>
+	{% endif %}
+
         <label for="email">E-mail</label>
         <input id="email" name="email" type="email" autocomplete="email" placeholder="seuemail@exemplo.com" required>
 

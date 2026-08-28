@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-	'homePage'
+	'homePage',
+	'accounts'
 ]
 
 MIDDLEWARE = [
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'Verbum.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,3 +127,13 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+# Configuração de sessão
+# A sessão expira após 30 minutos de inatividade
+SESSION_COOKIE_AGE = 1800
+
+# Renova a sessão a cada requisição enquanto o usuário estiver ativo
+SESSION_SAVE_EVERY_REQUEST = True
+
+# Impede que JavaScript acesse diretamente o cookie de sessão
+SESSION_COOKIE_HTTPONLY = True

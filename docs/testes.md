@@ -208,8 +208,8 @@ O funcionamento do login será novamente verificado após a correção do formul
 | 04 | Cadastro de usuário | Aprovado |
 | 05 | Confirmação de senha | Aprovado |
 | 06 | Validação de e-mail | Aprovado |
-| 07 | Usuário já existente | Identificado |
-| 08 | Login válido | Em teste |
+| 07 | Usuário já existente | Aprovado |
+| 08 | Login válido | Aprovado |
 
 ---
 

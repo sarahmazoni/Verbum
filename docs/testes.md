@@ -6,6 +6,8 @@ Este documento apresenta os testes realizados na aplicação Verbum durante a et
 
 Os testes foram realizados utilizando o front-end da aplicação, conforme solicitado nas orientações do Projeto Integrador.
 
+As evidências dos testes estão armazenadas na pasta `docs/evidencias/`.
+
 ---
 
 ## 1. Verificação do ambiente
@@ -13,8 +15,7 @@ Os testes foram realizados utilizando o front-end da aplicação, conforme solic
 Antes da realização dos testes funcionais, foi realizada a verificação do projeto utilizando o comando:
 
 ```bash
-py manage.py check
-```
+python manage.py check
 
 ### Resultado
 

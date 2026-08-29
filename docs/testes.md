@@ -21,12 +21,17 @@ py manage.py check
 O Django retornou:
 
 ```text
-System check identified no issues (0 silenced).
+System check identified some issues:
+
+WARNINGS:
+accounts.UserProfile: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+
+System check identified 1 issue (0 silenced).
 ```
 
-Não foram identificados problemas de configuração pelo sistema de verificações do Django.
+Foi identificado apenas um aviso relacionado ao tipo de chave primária utilizada no modelo `UserProfile`. Esse aviso não impede a execução da aplicação.
 
-**Resultado: Aprovado.**
+**Resultado: Aprovado com aviso.**
 
 ---
 
@@ -150,19 +155,19 @@ A evidência correspondente está armazenada na pasta `docs/evidencias/`.
 
 Foi realizada uma tentativa de cadastro utilizando um nome de usuário que já estava cadastrado no sistema.
 
-O Django retornou um erro relacionado à restrição de unicidade do campo `username`:
+A aplicação identificou que o nome de usuário já estava cadastrado e apresentou a mensagem:
 
 ```text
-UNIQUE constraint failed: auth_user.username
+Este nome de usuário já está cadastrado.
 ```
+
+O cadastro não foi concluído.
 
 ### Resultado
 
-**Resultado: Identificado.**
+**Resultado: Aprovado.**
 
-A restrição de unicidade está funcionando no banco de dados, impedindo a existência de dois usuários com o mesmo nome de usuário.
-
-Porém, durante o teste, o erro foi apresentado diretamente pelo Django. O ideal é que essa situação seja tratada pela aplicação e apresentada ao usuário através de uma mensagem mais amigável.
+A aplicação realizou corretamente a validação de unicidade do nome de usuário e impediu o cadastro de um usuário duplicado.
 
 A evidência correspondente está armazenada na pasta `docs/evidencias/`.
 
@@ -170,39 +175,29 @@ A evidência correspondente está armazenada na pasta `docs/evidencias/`.
 
 ## 8. Login
 
-Foi realizada uma tentativa de login utilizando uma conta cadastrada anteriormente.
+Foi realizado um teste de login utilizando uma conta cadastrada anteriormente.
 
-Durante o teste inicial, foi identificado um problema relacionado à proteção CSRF.
+Foram informados o e-mail e a senha cadastrados nos respectivos campos do formulário de autenticação.
 
-Após a alteração da forma de renderização da página de login, o erro de CSRF deixou de ser apresentado.
+Após o envio das credenciais válidas, a aplicação realizou a autenticação do usuário e redirecionou para o painel da aplicação.
 
-Entretanto, foi identificado que o formulário ainda estava realizando o envio para:
-
-```text
-POST /homePage/
-```
-
-em vez de encaminhar os dados para a rota responsável pela autenticação:
-
-```text
-/accounts/login/
-```
-
-Por esse motivo, o login ainda não foi considerado aprovado nesta etapa.
+O painel apresentou a identificação do usuário autenticado e os recursos disponíveis para o usuário.
 
 ### Resultado
 
-**Resultado: Em teste.**
+**Resultado: Aprovado.**
 
-O funcionamento do login será novamente verificado após a correção do formulário de autenticação.
+O login foi realizado corretamente através do front-end e o usuário autenticado foi direcionado ao painel da aplicação.
+
+A evidência correspondente está armazenada na pasta `docs/evidencias/`.
 
 ---
 
 ## 9. Resumo dos testes
 
-| Teste | Funcionalidade | Resultado |
+| **Teste** | **Funcionalidade** | **Resultado** |
 |---|---|---|
-| 01 | Verificação do ambiente Django | Aprovado |
+| 01 | Verificação do ambiente Django | Aprovado com aviso |
 | 02 | Inicialização da aplicação | Aprovado |
 | 03 | Tela de login | Aprovado |
 | 04 | Cadastro de usuário | Aprovado |
@@ -225,6 +220,8 @@ docs/evidencias/
 
 Os testes que apresentaram funcionamento correto foram registrados como aprovados.
 
-O teste de login permanece em desenvolvimento devido à inconsistência identificada no envio do formulário.
+O teste de usuário já existente foi corrigido para apresentar uma mensagem amigável ao usuário, em vez de exibir diretamente o erro de integridade do banco de dados.
 
-Os resultados serão atualizados após a conclusão dos testes restantes da funcionalidade de autenticação.
+O teste de login também foi concluído com sucesso, confirmando a autenticação das credenciais e o redirecionamento do usuário para o painel da aplicação.
+
+Os demais testes relacionados às funcionalidades de segurança, autenticação em dois fatores, bloqueio por tentativas de login, gerenciamento de sessão e logout deverão ser registrados conforme suas respectivas evidências de funcionamento pelo front-end.

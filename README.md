@@ -89,6 +89,12 @@ Os documentos de requisitos e escopo fornecidos para o Projeto Integrador estão
 * Henrique
 * Gabriel
 
+## Entrega Atual
+
+- **Release**: [v1.1.0 – Autenticação e Gestão de Credenciais](https://github.com/sarahmazoni/Verbum/releases/tag/v1.1.0)
+- **Release**: [v1.0.0 – Autenticação e Gestão de Credenciais](https://github.com/sarahmazoni/Verbum/releases/tag/v1.0.0)
+- **Quadro Kanban**: [Verbum - Projeto Integrador](https://github.com/users/sarahmazoni/projects/1)
+  
 ## Status
 
 Projeto em desenvolvimento.

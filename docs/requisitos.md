@@ -215,6 +215,6 @@ Os requisitos são comprovados por meio das evidências de funcionamento dispon�
 
 Os testes foram realizados utilizando o front-end da aplicação, conforme solicitado nas instruções do Projeto Integrador.
 
-Cada evidência está relacionada ao requisito correspondente e demonstra o funcionamento prático da funcionalidade implementada.
+As evidências disponíveis estão relacionadas aos respectivos requisitos e demonstram o funcionamento prático das funcionalidades testadas.
 
 As evidências foram registradas por meio de capturas de tela da aplicação durante a realização dos testes.

@@ -81,10 +81,11 @@ Os registros de consentimento considerarão informações como finalidade, data 
 
 ## Como executar
 
-```bash
+
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
+
 
 ## Estrutura do Projeto
 
@@ -99,6 +100,7 @@ Verbum/
 ├── README.md
 ├── LICENSE
 └── .gitignore
+
 
 ## Documentação
 

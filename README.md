@@ -81,7 +81,7 @@ Os registros de consentimento considerarão informações como finalidade, data 
 
 ## Como executar
 
-
+```bash
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
@@ -89,18 +89,17 @@ python manage.py runserver
 
 ## Estrutura do Projeto
 
-Verbum/
-├── accounts/
-├── homePage/
-├── templates/
-├── docs/
-├── Verbum/
-├── manage.py
-├── requirements.txt
-├── README.md
-├── LICENSE
-└── .gitignore
-
+    Verbum/
+    ├── accounts/
+    ├── homePage/
+    ├── templates/
+    ├── docs/
+    ├── Verbum/
+    ├── manage.py
+    ├── requirements.txt
+    ├── README.md
+    ├── LICENSE
+    └── .gitignore
 
 ## Documentação
 
@@ -114,9 +113,9 @@ Os documentos de requisitos e escopo fornecidos para o Projeto Integrador estão
 
 ## Entrega Atual
 
-- **Release**: [v1.1.0 – Autenticação e Gestão de Credenciais](https://github.com/sarahmazoni/Verbum/releases/tag/v1.1.0)
-- **Quadro Kanban**: [Verbum - Projeto Integrador](https://github.com/users/sarahmazoni/projects/1)
-  
+* Release: [v1.1.0 – Autenticação e Gestão de Credenciais](https://github.com/sarahmazoni/Verbum/releases/tag/v1.1.0)
+* Quadro Kanban: [Verbum - Projeto Integrador](https://github.com/users/sarahmazoni/projects/1)
+
 ## Status
 
 Projeto em desenvolvimento.

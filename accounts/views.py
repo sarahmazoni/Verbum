@@ -1,13 +1,13 @@
-from django.shortcuts import render
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login as auth_login
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from .models import UserProfile
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login as auth_login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 from django.contrib import messages
-from django.contrib.auth import logout
 from django.utils import timezone
 from datetime import timedelta
+from .models import UserProfile
 import pyotp
 
 # Máximo de tentativas
@@ -15,6 +15,7 @@ MAX_LOGIN_ATTEMPTS = 5
 
 # Duração do bloqueio
 LOCKOUT_DURATION = timedelta(minutes=5)
+
 
 def register(request):
 
@@ -25,34 +26,49 @@ def register(request):
 		password = request.POST.get('password')
 		password_confirmation = request.POST.get('password_confirmation')
 
-		# Aqui se uma senha não for igual a outra senha de confirmação o usuário recebe uma mensagem de erro
+		# Se a senha e a confirmação forem diferentes, o cadastro não segue
 		if password != password_confirmation:
 			return render(
 				request,
 				'register.html',
 				{'error': 'As senhas não coincidem.'}
-
 			)
 
-		# Aqui a senha normal não será armazenada de forma normal, internamente o Django esta utilizando o mecanismo de hashing
+		# Impede cadastro com nome de usuário que já existe
+		if User.objects.filter(username=username).exists():
+			return render(
+				request,
+				'register.html',
+				{'error': 'Este nome de usuário já está cadastrado.'}
+			)
+
+		# Aplica os validadores de senha configurados no settings.py
+		try:
+			validate_password(password)
+		except ValidationError as e:
+			return render(
+				request,
+				'register.html',
+				{'error': ' '.join(e.messages)}
+			)
+
+		# A senha não é gravada em texto puro; o Django aplica o hash
 		user = User.objects.create_user(
 			username=username,
 			email=email,
 			password=password
-
 		)
 
 		UserProfile.objects.create(user=user)
 
-		# Aqui se uma senha for igual a outra senha de confirmação o usuário recebe a mensagem de sucesso
 		return render(
 			request,
 			'register.html',
 			{'success': 'Usuário cadastrado com sucesso!'}
-
 		)
 
 	return render(request, 'register.html')
+
 
 def login_view(request):
 
@@ -81,7 +97,6 @@ def login_view(request):
 						request,
 						'login.html',
 						{'error': 'Conta temporariamente bloqueada. Tente novamente mais tarde.'}
-
 					)
 
 				# Se o período de bloqueio terminou, a conta é liberada
@@ -89,7 +104,6 @@ def login_view(request):
 				profile.failed_login_attempts = 0
 				profile.save(
 					update_fields=['locked_until', 'failed_login_attempts']
-
 				)
 
 			# Aqui verifica a senha e se estiver correta o authenticate_user será um usuário e se estiver errada será none
@@ -107,7 +121,6 @@ def login_view(request):
 				profile.locked_until = None
 				profile.save(
 					update_fields=['failed_login_attempts', 'locked_until']
-
 				)
 
 				# Se o usuário possui 2FA ativado, ainda não fazemos o login
@@ -126,7 +139,7 @@ def login_view(request):
 
 			else:
 
-				# A senha informada está correta
+				# A senha informada está incorreta
 				profile.failed_login_attempts += 1
 
 				# Se atingir o limite, a conta é bloqueada temporariamente
@@ -136,29 +149,26 @@ def login_view(request):
 
 					profile.save(
 						update_fields=['failed_login_attempts', 'locked_until']
-
 					)
 
 					return render(
 						request,
 						'login.html',
 						{'error': 'Conta temporariamente bloqueada. Tente novamente mais tarde.'}
-
 					)
 
 				profile.save(
 					update_fields=['failed_login_attempts']
-
 				)
 
 		return render(
-
 			request,
 			'login.html',
 			{'error': 'Email ou senha inválidos.'}
 		)
 
 	return render(request, 'login.html')
+
 
 # Diferente das outras funções não coloquei o @login_required aqui pois o usuário ainda não é considerado autenticado pelo Django
 def verify_2fa(request):
@@ -197,7 +207,6 @@ def verify_2fa(request):
 			request,
 			'verify_2fa.html',
 			{'error': 'Código 2FA inválido.'}
-
 		)
 
 	return render(request, 'verify_2fa.html')
@@ -243,13 +252,11 @@ def setup_2fa(request):
 		messages.error(
 			request,
 			'Código inválido. Tente novamente.'
-
 		)
 
 	provisioning_uri = totp.provisioning_uri(
 		name=request.user.email,
 		issuer_name='Verbum'
-
 	)
 
 	return render(
@@ -258,10 +265,9 @@ def setup_2fa(request):
 		{
 			'secret': profile.totp_secret,
 			'provisioning_uri': provisioning_uri,
-
 		}
-
 	)
+
 
 def logout_view(request):
 

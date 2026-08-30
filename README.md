@@ -12,39 +12,39 @@ O projeto tem como objetivo disponibilizar uma plataforma que organize o aprendi
 
 Implementadas nesta entrega:
 
-* Cadastro e autenticação de usuários
-* Autenticação em dois fatores (2FA)
+- Cadastro e autenticação de usuários
+- Autenticação em dois fatores (2FA)
 
 Previstas para as próximas etapas:
 
-* Recuperação e alteração de senha
-* Gerenciamento de perfil
-* Seleção do idioma estudado (inglês)
-* Vocabulário de alta frequência
-* Chunks e expressões frequentes
-* Histórico de estudos
-* Gerenciamento de consentimento
-* Consulta, exportação e exclusão de dados pessoais
-* Registro de eventos de auditoria
+- Recuperação e alteração de senha
+- Gerenciamento de perfil
+- Seleção do idioma estudado (inglês)
+- Vocabulário de alta frequência
+- Chunks e expressões frequentes
+- Histórico de estudos
+- Gerenciamento de consentimento
+- Consulta, exportação e exclusão de dados pessoais
+- Registro de eventos de auditoria
 
 ## Stack Tecnológico
 
 ### Backend
 
-* Python
-* Django
+- Python
+- Django
 
 ### Banco de Dados
 
-* SQLite nesta entrega (desenvolvimento e avaliação)
-* PostgreSQL previsto para as próximas etapas
+- SQLite nesta entrega (desenvolvimento e avaliação)
+- PostgreSQL previsto para as próximas etapas
 
 ### Frontend
 
-* HTML
-* CSS
-* Bootstrap
-* JavaScript
+- HTML
+- CSS
+- Bootstrap
+- JavaScript
 
 ### Arquitetura
 
@@ -56,36 +56,36 @@ O projeto prevê mecanismos de segurança para proteção das contas e dos dados
 
 Implementados nesta entrega:
 
-* Hash e salt das senhas pelo mecanismo de autenticação do Django
-* Autenticação em dois fatores
-* Controle e expiração de sessões
-* Proteção contra tentativas excessivas de autenticação
+- Hash e salt das senhas pelo mecanismo de autenticação do Django
+- Autenticação em dois fatores
+- Controle e expiração de sessões
+- Proteção contra tentativas excessivas de autenticação
 
 Previstos para as próximas etapas:
 
-* Hash seguro de senhas utilizando Argon2
-* Recuperação de senha por token temporário
-* Comunicação protegida por HTTPS/TLS
-* Registro e auditoria de eventos de segurança
+- Hash seguro de senhas utilizando Argon2
+- Recuperação de senha por token temporário
+- Comunicação protegida por HTTPS/TLS
+- Registro e auditoria de eventos de segurança
 
 ## Privacidade e LGPD
 
 O sistema será desenvolvido considerando princípios de proteção de dados pessoais, permitindo ao usuário:
 
-* Consultar seus dados
-* Solicitar a exportação de seus dados
-* Excluir sua conta
-* Gerenciar seu consentimento
+- Consultar seus dados
+- Solicitar a exportação de seus dados
+- Excluir sua conta
+- Gerenciar seu consentimento
 
 Os registros de consentimento considerarão informações como finalidade, data e versão do consentimento.
 
 ## Como executar
 
-```bash
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py runserver
+    pip install -r requirements.txt
+    python manage.py migrate
+    python manage.py runserver
 
+A aplicação estará disponível em http://127.0.0.1:8000/.
 
 ## Estrutura do Projeto
 
@@ -103,18 +103,18 @@ python manage.py runserver
 
 ## Documentação
 
-Os documentos de requisitos e escopo fornecidos para o Projeto Integrador estão disponíveis na pasta `docs`.
+Os documentos de requisitos e escopo fornecidos para o Projeto Integrador estão disponíveis na pasta docs.
 
 ## Equipe
 
-* Sarah
-* Henrique
-* Gabriel
+- Sarah
+- Henrique
+- Gabriel
 
 ## Entrega Atual
 
-* Release: [v1.1.0 – Autenticação e Gestão de Credenciais](https://github.com/sarahmazoni/Verbum/releases/tag/v1.1.0)
-* Quadro Kanban: [Verbum - Projeto Integrador](https://github.com/users/sarahmazoni/projects/1)
+- Release: https://github.com/sarahmazoni/Verbum/releases/tag/v1.1.0
+- Quadro Kanban: https://github.com/users/sarahmazoni/projects/1
 
 ## Status
 

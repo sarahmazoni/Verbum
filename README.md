@@ -36,8 +36,7 @@ Previstas para as próximas etapas:
 
 ### Banco de Dados
 
-- SQLite nesta entrega (desenvolvimento e avaliação)
-- PostgreSQL previsto para as próximas etapas
+- SQLite 
 
 ### Frontend
 

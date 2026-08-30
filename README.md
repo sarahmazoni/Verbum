@@ -10,11 +10,16 @@ O projeto tem como objetivo disponibilizar uma plataforma que organize o aprendi
 
 ## Funcionalidades
 
+Implementadas nesta entrega:
+
 * Cadastro e autenticação de usuários
 * Autenticação em dois fatores (2FA)
+
+Previstas para as próximas etapas:
+
 * Recuperação e alteração de senha
 * Gerenciamento de perfil
-* Seleção do idioma estudado(ingles)
+* Seleção do idioma estudado (inglês)
 * Vocabulário de alta frequência
 * Chunks e expressões frequentes
 * Histórico de estudos
@@ -31,7 +36,8 @@ O projeto tem como objetivo disponibilizar uma plataforma que organize o aprendi
 
 ### Banco de Dados
 
-* PostgreSQL
+* SQLite nesta entrega (desenvolvimento e avaliação)
+* PostgreSQL previsto para as próximas etapas
 
 ### Frontend
 
@@ -42,17 +48,22 @@ O projeto tem como objetivo disponibilizar uma plataforma que organize o aprendi
 
 ### Arquitetura
 
-O sistema utilizará a arquitetura **MVT (Model-View-Template)** disponibilizada pelo framework Django.
+O sistema utiliza a arquitetura MVT (Model-View-Template) disponibilizada pelo framework Django.
 
 ## Segurança
 
-O projeto prevê mecanismos de segurança para proteção das contas e dos dados dos usuários, incluindo:
+O projeto prevê mecanismos de segurança para proteção das contas e dos dados dos usuários.
 
-* Hash seguro de senhas utilizando Argon2
-* Salt para proteção das credenciais
+Implementados nesta entrega:
+
+* Hash e salt das senhas pelo mecanismo de autenticação do Django
 * Autenticação em dois fatores
 * Controle e expiração de sessões
 * Proteção contra tentativas excessivas de autenticação
+
+Previstos para as próximas etapas:
+
+* Hash seguro de senhas utilizando Argon2
 * Recuperação de senha por token temporário
 * Comunicação protegida por HTTPS/TLS
 * Registro e auditoria de eventos de segurança
@@ -68,16 +79,26 @@ O sistema será desenvolvido considerando princípios de proteção de dados pes
 
 Os registros de consentimento considerarão informações como finalidade, data e versão do consentimento.
 
+## Como executar
+
+```bash
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+
 ## Estrutura do Projeto
 
-```text
 Verbum/
+├── accounts/
+├── homePage/
+├── templates/
 ├── docs/
-├── src/
+├── Verbum/
+├── manage.py
+├── requirements.txt
 ├── README.md
 ├── LICENSE
 └── .gitignore
-```
 
 ## Documentação
 

@@ -42,7 +42,6 @@ Previstas para as próximas etapas:
 
 - HTML
 - CSS
-- Bootstrap
 - JavaScript
 
 ### Arquitetura

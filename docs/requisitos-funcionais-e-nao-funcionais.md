@@ -3,7 +3,7 @@
 **Projeto:** Verbum — Plataforma de aprendizagem de idiomas  
 **Versão do documento:** 1.1  
 **Release de referência:** v1.1.0 (Autenticação e Gestão de Credenciais)  
-**Stack:** Python, Django (MVT), SQLite, HTML/CSS/JavaScript, Bootstrap  
+**Stack:** Python, Django (MVT), SQLite, HTML/CSS/JavaScript  
 **Equipe:** Sarah, Henrique, Gabriel  
 
 Este documento descreve o que o sistema deve fazer (requisitos funcionais) e as restrições de qualidade, segurança e conformidade (requisitos não funcionais).  

@@ -137,3 +137,8 @@ SESSION_SAVE_EVERY_REQUEST = True
 
 # Impede que JavaScript acesse diretamente o cookie de sessão
 SESSION_COOKIE_HTTPONLY = True
+
+# Tempo de validade do token de recuperação de senha
+# 15 minutos = 900 segundos
+
+PASSWORD_RESET_TIMEOUT = 900

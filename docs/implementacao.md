@@ -267,3 +267,47 @@ implementações presentes no código atual do projeto.
 
 A comprovação do funcionamento será realizada através dos testes
 da aplicação e das evidências obtidas pelo front-end.
+
+## 10. Recuperação de senha
+
+A recuperação de senha utiliza as views do Django, com classes
+próprias para registrar os eventos.
+
+Arquivo: `accounts/views.py`
+
+- `PasswordResetRequestView` — pedido do e-mail e log da solicitação
+- `PasswordResetConfirmView` — validação do token, nova senha e logs
+  de sucesso ou de token inválido
+
+### Fluxo
+
+1. Usuário acessa “Esqueci minha senha”.
+2. Informa o e-mail.
+3. Sistema registra a solicitação.
+4. Sistema gera o token temporário.
+5. Usuário abre o link e define a nova senha.
+6. Sistema valida o token e a senha.
+7. Senha é atualizada pelo mecanismo do Django.
+8. Token deixa de ser válido.
+9. Sistema registra o resultado.
+
+A expiração é configurada em `PASSWORD_RESET_TIMEOUT`.
+
+Na estrutura de arquivos:
+
+- `accounts/views.py` também contém as classes de recuperação;
+- `accounts/urls.py` define as rotas `password-reset`,
+  `password-reset/done`, `password-reset-confirm` e
+  `password-reset-complete`;
+- `Verbum/settings.py` contém `PASSWORD_RESET_TIMEOUT` e o
+  backend de e-mail usado em desenvolvimento.
+
+---
+
+## 11. Considerações
+
+As funcionalidades descritas neste documento correspondem às
+implementações presentes no código atual do projeto.
+
+A comprovação do funcionamento será realizada através dos testes
+da aplicação e das evidências obtidas pelo front-end.

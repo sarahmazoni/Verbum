@@ -137,5 +137,4 @@ As capturas ficam em `docs/evidencias/`.
 - `20-log-sucesso.png`
 - `21-log-falha-token.png`
 
-Se os nomes dos prints forem outros, atualizar esta lista e a
-seção correspondente em `testes.md`.
+

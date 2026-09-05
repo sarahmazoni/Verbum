@@ -156,7 +156,23 @@ de login.
 
 ---
 
-## 9. Resumo dos mecanismos de segurança
+## 9. Recuperação de senha
+
+A redefinição de senha não reutiliza a senha antiga e não grava
+token no banco.
+
+O token é temporário, gerado pelo mecanismo padrão do Django,
+expira em 1 hora e deixa de valer depois que a senha é alterada.
+
+Tentativas com link inválido ou vencido são recusadas na interface
+e registradas em log.
+
+A nova senha passa pelos mesmos validadores do cadastro e é
+armazenada apenas como hash.
+
+---
+
+## 10. Resumo dos mecanismos de segurança
 
 | Mecanismo | Implementação |
 |---|---|
@@ -170,10 +186,12 @@ de login.
 | Duração da sessão | 30 minutos |
 | Cookie HttpOnly | `SESSION_COOKIE_HTTPONLY` |
 | Logout | `django.contrib.auth.logout()` |
+| Recuperação de senha | Token temporário do Django + logs de evento |
+| Expiração do token | 3600 segundos |
 
 ---
 
-## 10. Considerações
+## 11. Considerações
 
 Os mecanismos apresentados foram implementados com o objetivo de
 proteger o processo de autenticação e reduzir riscos relacionados

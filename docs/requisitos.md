@@ -206,6 +206,7 @@ Essas configurações estão presentes no arquivo:
 | Gerenciamento de sessão | Implementado |
 | Logout | Implementado |
 | Validação de senha | Implementado |
+| Recuperação de senha | Implementado |
 
 ---
 
@@ -218,3 +219,49 @@ Os testes foram realizados utilizando o front-end da aplicação, conforme solic
 As evidências disponíveis estão relacionadas aos respectivos requisitos e demonstram o funcionamento prático das funcionalidades testadas.
 
 As evidências foram registradas por meio de capturas de tela da aplicação durante a realização dos testes.
+
+---
+
+## 10. Recuperação de senha
+
+**Status:** Implementado
+
+O sistema permite redefinir a senha por token temporário.
+
+O usuário solicita a recuperação pela tela de login, informa o
+e-mail e recebe um link com token. O token tem prazo de validade,
+é invalidado depois do uso e falha quando está expirado ou
+adulterado.
+
+A implementação está em:
+
+`accounts/views.py`
+
+Classes:
+
+- `PasswordResetRequestView`
+- `PasswordResetConfirmView`
+
+As rotas estão em `accounts/urls.py`.
+
+O tempo de expiração está em `Verbum/settings.py`
+(`PASSWORD_RESET_TIMEOUT`).
+
+A solicitação, o sucesso e a falha do token são registrados em log,
+sem armazenar o token nem a senha.
+
+### Evidências
+
+- `11-login-esqueci-senha.png`
+- `12-form-recuperacao.png`
+- `13-email-enviado.png`
+- `14-email-console.png`
+- `15-nova-senha.png`
+- `16-reset-sucesso.png`
+- `17-token-reutilizado.png`
+- `18-token-invalido.png`
+- `19-log-solicitacao.png`
+- `20-log-sucesso.png`
+- `21-log-falha-token.png`
+
+O detalhamento técnico está em `docs/recuperacao-senha.md`.

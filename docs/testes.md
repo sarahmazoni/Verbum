@@ -199,8 +199,82 @@ A sessão foi encerrada e o usuário retornou para a tela de login. O painel dei
 **Resultado: Aprovado.**
 
 ---
+## 15. Recuperação de senha — solicitação
 
-## 15. Resumo dos testes
+Foi acessada a opção “Esqueci minha senha” a partir do login.
+O formulário solicitou o e-mail. Após o envio, a aplicação mostrou
+a tela de confirmação de envio.
+
+**Evidências:** `11-login-esqueci-senha.png`, `12-form-recuperacao.png`,
+`13-email-enviado.png`
+
+**Resultado: Aprovado.**
+
+---
+
+## 16. Recuperação de senha — link no console
+
+Com o `EMAIL_BACKEND` de console, o servidor exibiu o e-mail com
+o link de redefinição.
+
+**Evidência:** `14-email-console.png`
+
+**Resultado: Aprovado.**
+
+---
+
+## 17. Recuperação de senha — redefinição válida
+
+O link válido foi aberto. Foram informadas senha e confirmação
+válidas. A aplicação concluiu o processo e permitiu o login com
+a nova senha.
+
+**Evidências:** `15-nova-senha.png`, `16-reset-sucesso.png`
+
+**Resultado: Aprovado.**
+
+---
+
+## 18. Token reutilizado
+
+Após a redefinição, o mesmo link foi aberto novamente.
+A aplicação recusou o token.
+
+**Evidência:** `17-token-reutilizado.png`
+
+**Resultado: Aprovado.**
+
+---
+
+## 19. Token inválido ou expirado
+
+Foi acessado um link inválido. A aplicação apresentou a falha
+no front-end.
+
+**Evidência:** `18-token-invalido.png`
+
+**Resultado: Aprovado.**
+
+---
+
+## 20. Logs do processo
+
+Foram verificados os registros:
+
+- solicitação recebida;
+- recuperação concluída;
+- tentativa com token inválido.
+
+Nenhum log continha token ou senha.
+
+**Evidências:** `19-log-solicitacao.png`, `20-log-sucesso.png`,
+`21-log-falha-token.png`
+
+**Resultado: Aprovado.**
+
+---
+
+## 21. Resumo dos testes
 
 | Teste | Funcionalidade | Evidência | Resultado |
 | --- | --- | --- | --- |
@@ -218,13 +292,22 @@ A sessão foi encerrada e o usuário retornou para a tela de login. O painel dei
 | 12 | Bloqueio por tentativas | 09-bloqueio-tentativas.png | Aprovado |
 | 13 | Gerenciamento de sessão | 05 e 06 | Aprovado |
 | 14 | Logout | — | Aprovado |
+| 15 | Pedido de recuperação | 11, 12 e 13 | Aprovado |
+| 16 | Link no console | 14-email-console.png | Aprovado |
+| 17 | Redefinição válida | 15 e 16 | Aprovado |
+| 18 | Token reutilizado | 17-token-reutilizado.png | Aprovado |
+| 19 | Token inválido | 18-token-invalido.png | Aprovado |
+| 20 | Logs do processo | 19, 20 e 21 | Aprovado |
 
 ---
 
-## 16. Observações
+## 22. Observações
 
 Os testes desta etapa foram realizados diretamente pelo front-end da aplicação.
 
 As evidências estão organizadas na pasta `docs/evidencias/`.
 
 O aviso `models.W042` não impede a execução nem a avaliação funcional da aplicação.
+
+Enquanto os prints da recuperação não forem gerados, manter os nomes previstos
+neste documento e substituir somente se a equipe padronizar outra numeração.

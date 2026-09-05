@@ -8,7 +8,11 @@ from django.contrib import messages
 from django.utils import timezone
 from datetime import timedelta
 from .models import UserProfile
+from django.contrib.auth import views as auth_views
 import pyotp
+import logging
+
+logger = logging.getLogger(__name__)
 
 # Máximo de tentativas
 MAX_LOGIN_ATTEMPTS = 5
@@ -275,3 +279,33 @@ def logout_view(request):
 	logout(request)
 
 	return redirect('login')
+
+class PasswordResetRequestView(auth_views.PasswordResetView):
+
+	def form_valid(self, form):
+
+		# Aqui faz um registro de solicitação de recuperação de senha recebida, e nenhum token ou link é armazenado no log
+		logger.info('Solicitação de recuperação de senha recebida.')
+
+		return super().form_valid(form)
+
+class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
+
+	# Assim que o usuário enviar a solicitação, o django verifica o token de recuperação
+	def dispatch(self, request, *args, **kwargs):
+
+		response = super().dispatch(request, *args, **kwargs)
+
+		# Se o django identificar que o link contém um token inválido ou expirado, registra a tentativa
+		if getattr(response, 'context_data', {}).get('validlink') is False:
+			logger.warning('Tentativa de recuperação de senha com token inválido ou expirado.')
+
+		return response
+
+	# Assim que o usuário digitar duas senhas iguais no link contendo o token o django chama esse método
+	def form_valid(self, form):
+
+		# Faz o registro de que a recuperação de senha foi concluida mas não adiciona nenhuma senha ou token
+		logger.info('Recuperação de senha concluída com sucesso.')
+
+		return super().form_valid(form)

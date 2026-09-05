@@ -142,3 +142,34 @@ SESSION_COOKIE_HTTPONLY = True
 # 15 minutos = 900 segundos
 
 PASSWORD_RESET_TIMEOUT = 900
+
+# Este código é relacionado ao logging de atividade do usuário
+LOGGING = {
+	'version': 1,
+	'disable_existing_loggers': False,
+
+	# Aqui escrevi que os logs serão guardados em verbum.log
+	'handlers': {
+		'file': {
+			'class': 'logging.FileHandler',
+			'filename': BASE_DIR / 'verbum.log',
+
+		},
+
+	},
+
+
+	# Aqui diz de onde os logs vão vir, que no caso é de accounts
+	'loggers': {
+		'accounts': {
+			'handlers': ['file'],
+
+			# Registrar eventos de nível INFO
+			'level': 'INFO',
+			'propagate': False,
+
+		},
+
+	},
+
+}

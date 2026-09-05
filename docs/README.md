@@ -7,9 +7,10 @@ Pasta de requisitos, escopo, segurança e evidências do Projeto Integrador — 
 | Arquivo | O que é |
 |---|---|
 | [requisitos-funcionais-e-nao-funcionais.md](requisitos-funcionais-e-nao-funcionais.md) | Especificação do produto: RF, RNF, atores, LGPD e rastreabilidade com a rubrica |
-| [requisitos.md](requisitos.md) | Checklist da etapa de autenticação + prints |
+| [requisitos.md](requisitos.md) | Checklist das etapas implementadas + prints |
 | [implementacao.md](implementacao.md) | Como o código realiza cada fluxo |
 | [seguranca.md](seguranca.md) | Mecanismos de proteção e justificativas |
+| [recuperacao-senha.md](recuperacao-senha.md) | Etapa 2: token, expiração, logs e evidências |
 | [testes.md](testes.md) | Casos de teste executados no front-end |
 | `evidencias/` | Capturas de tela dos testes |
 | `Projeto Integrador.pdf` | Enunciado da disciplina |
@@ -17,5 +18,6 @@ Pasta de requisitos, escopo, segurança e evidências do Projeto Integrador — 
 
 ## Status da documentação
 
-A etapa v1.1.0 cobre autenticação e gestão de credenciais.  
-Recuperação de senha, HTTPS de produção, telas de titular (LGPD) e logs de auditoria estão especificados como **Planejado** no documento de RF/RNF.
+A etapa atual cobre autenticação, gestão de credenciais e recuperação de senha (itens 2.1 a 2.7 do checklist).
+
+HTTPS de produção, telas de titular (LGPD) e logs de auditoria ampliada permanecem previstos para as próximas entregas.

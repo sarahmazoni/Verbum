@@ -2,20 +2,13 @@
 
 ## Projeto Integrador - Etapa 2
 
-Este documento descreve a recuperação de senha do Verbum, alinhada
-aos itens 2.1 a 2.7 do checklist oficial.
-
-A funcionalidade foi implementada com as views de redefinição de
-senha do Django, templates próprios e registro em log dos eventos
-do processo. Os testes são realizados pelo front-end.
+Documentação dos itens 2.1 a 2.7 do checklist.
 
 ---
 
 ## 1. Objetivo
 
-Permitir que o titular redefina a senha sem conhecimento da senha
-atual, usando um token temporário, com expiração, uso único e
-registro de auditoria.
+Redefinir a senha sem conhecer a senha atual, com token temporário, expiração, uso único e auditoria.
 
 ---
 
@@ -24,14 +17,14 @@ registro de auditoria.
 | Elemento | Local |
 | --- | --- |
 | Solicitação | `accounts/views.py` — `PasswordResetRequestView` |
-| Confirmação da nova senha | `accounts/views.py` — `PasswordResetConfirmView` |
+| Confirmação | `accounts/views.py` — `PasswordResetConfirmView` |
 | Rotas | `accounts/urls.py` |
-| Tela de pedido | `password_reset_form.html` |
-| Tela de e-mail enviado | `password_reset_done.html` |
-| Tela de nova senha / link inválido | `password_reset_confirm.html` |
-| Tela de conclusão | `password_reset_complete.html` |
-| Tempo de vida do token | `Verbum/settings.py` — `PASSWORD_RESET_TIMEOUT` |
-| Envio em desenvolvimento | `EMAIL_BACKEND` (console) |
+| Formulário | `password_reset_form.html` |
+| E-mail enviado | `password_reset_done.html` |
+| Nova senha / inválido | `password_reset_confirm.html` |
+| Conclusão | `password_reset_complete.html` |
+| Timeout | `PASSWORD_RESET_TIMEOUT = 900` |
+| Envio em desenvolvimento | backend de e-mail console |
 
 Rotas:
 
@@ -44,97 +37,62 @@ Rotas:
 
 ## 3. Fluxo
 
-1. Na tela de login, o usuário escolhe “Esqueci minha senha”.
-2. Informa o e-mail.
-3. O sistema registra a solicitação em log e apresenta a tela de
-   confirmação de envio.
-4. É gerado um token temporário associado ao usuário.
-5. Em desenvolvimento, o link aparece no console do servidor.
-6. O usuário abre o link, informa a nova senha e a confirmação.
-7. Se o token for válido e a senha atender aos validadores, a senha
-   é atualizada (hash + salt do Django).
-8. O token deixa de ser válido.
-9. O sistema registra o sucesso em log e mostra a tela de conclusão.
+1. “Esqueci minha senha” no login.
+2. Informe do e-mail.
+3. Log da solicitação e tela de confirmação.
+4. Geração do token.
+5. Link no console em desenvolvimento.
+6. Nova senha + confirmação.
+7. Validação do token e dos validadores.
+8. Token invalidado.
+9. Log de sucesso.
 
-Se o token estiver expirado, adulterado ou já utilizado, a tela de
-confirmação informa que o link é inválido e o evento é registrado
-em log.
+Token expirado, adulterado ou reutilizado: tela de link inválido e log de falha.
 
 ---
 
-## 4. Token (itens 2.2, 2.3, 2.4 e 2.5)
+## 4. Token (2.2 a 2.5)
 
-O token é gerado pelo `PasswordResetTokenGenerator` do Django.
+Gerado pelo `PasswordResetTokenGenerator` (HMAC).
 
-Características usadas nesta etapa:
-
-- geração criptográfica (HMAC) com dados do usuário e da senha atual;
-- o token **não é gravado** no banco;
-- o token **não é gravado** no log;
-- validade definida por `PASSWORD_RESET_TIMEOUT` (3600 segundos);
-- depois que a senha muda, o token antigo deixa de ser aceito;
-- link expirado, reutilizado ou inválido apresenta falha visível
-  no front-end (`validlink` falso).
-
-Justificativa do tempo: 1 hora reduz a janela de abuso do link
-e ainda permite que o usuário conclua o fluxo na mesma sessão
-de estudo.
+- não vai para o banco
+- não vai para o log
+- vale 900 segundos
+- perde validade quando a senha muda
+- `validlink` falso no front-end quando inválido
 
 ---
 
-## 5. Auditoria (itens 2.6 e 2.7)
-
-Os eventos são registrados pelo `logging` do Python nas views
-personalizadas.
+## 5. Auditoria (2.6 e 2.7)
 
 | Evento | Nível | Mensagem |
 | --- | --- | --- |
-| Pedido de recuperação | INFO | Solicitação de recuperação de senha recebida. |
-| Token inválido ou expirado | WARNING | Tentativa de recuperação de senha com token inválido ou expirado. |
-| Redefinição concluída | INFO | Recuperação de senha concluída com sucesso. |
-
-Os logs não incluem senha, token, uid ou e-mail.
+| Pedido | INFO | Solicitação de recuperação de senha recebida. |
+| Token inválido | WARNING | Tentativa de recuperação de senha com token inválido ou expirado. |
+| Sucesso | INFO | Recuperação de senha concluída com sucesso. |
 
 ---
 
-## 6. Relação com a LGPD (mínimo desta etapa)
+## 6. LGPD (mínimo desta etapa)
 
-- Finalidade do e-mail no fluxo: recuperar o acesso à conta.
-- Não se coleta dado adicional para essa função.
-- A mensagem de “e-mail enviado” não confirma se o endereço
-  está cadastrado, reduzindo exposição de contas.
-- A nova senha não é armazenada em texto puro.
+Finalidade limitada à recuperação de acesso. Sem coleta extra. A tela de envio não confirma se o e-mail existe. Senha só em hash.
 
 ---
 
 ## 7. Checklist 2.x
 
-| Nº | Requisito | Status | Onde comprovar |
+| Nº | Requisito | Status | Comprovação |
 | --- | --- | --- | --- |
-| 2.1 | Funcionalidade implementada | Implementado | Fluxo completo no front-end |
-| 2.2 | Token criptograficamente seguro | Implementado | Gerador de token do Django + este documento |
-| 2.3 | Token com expiração | Implementado | `PASSWORD_RESET_TIMEOUT` |
-| 2.4 | Token invalidado após o uso | Implementado | Reuso do mesmo link |
-| 2.5 | Falha para token expirado/inválido | Implementado | Tela de link inválido |
-| 2.6 | Log da solicitação | Implementado | Log INFO na request |
-| 2.7 | Log de sucesso e falha | Implementado | Log INFO e WARNING na confirm |
+| 2.1 | Funcionalidade | Implementado | Front-end |
+| 2.2 | Token seguro | Implementado | Gerador do Django |
+| 2.3 | Expiração | Implementado | `PASSWORD_RESET_TIMEOUT` |
+| 2.4 | Invalidação após uso | Implementado | Reuso do link |
+| 2.5 | Falha visível | Implementado | Tela de link inválido |
+| 2.6 | Log da solicitação | Implementado | INFO |
+| 2.7 | Log de sucesso e falha | Implementado | INFO e WARNING |
 
 ---
 
 ## 8. Evidências
 
-As capturas ficam em `docs/evidencias/`.
-
-- `11-login-esqueci-senha.png`
-- `12-form-recuperacao.png`
-- `13-email-enviado.png`
-- `14-email-console.png`
-- `15-nova-senha.png`
-- `16-reset-sucesso.png`
-- `17-token-reutilizado.png`
-- `18-token-invalido.png`
-- `19-log-solicitacao.png`
-- `20-log-sucesso.png`
-- `21-log-falha-token.png`
-
-
+`11` a `21` em `docs/evidencias/`.

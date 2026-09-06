@@ -11,21 +11,10 @@ O projeto tem como objetivo disponibilizar uma plataforma que organize o aprendi
 ## Funcionalidades
 
 Implementadas nesta entrega:
-
 - Cadastro e autenticação de usuários
 - Autenticação em dois fatores (2FA)
+- Recuperação de senha por token temporário (expiração 15 min, uso único e logs)
 
-Previstas para as próximas etapas:
-
-- Recuperação e alteração de senha
-- Gerenciamento de perfil
-- Seleção do idioma estudado (inglês)
-- Vocabulário de alta frequência
-- Chunks e expressões frequentes
-- Histórico de estudos
-- Gerenciamento de consentimento
-- Consulta, exportação e exclusão de dados pessoais
-- Registro de eventos de auditoria
 
 ## Stack Tecnológico
 
@@ -50,21 +39,13 @@ O sistema utiliza a arquitetura MVT (Model-View-Template) disponibilizada pelo f
 
 ## Segurança
 
-O projeto prevê mecanismos de segurança para proteção das contas e dos dados dos usuários.
-
 Implementados nesta entrega:
-
-- Hash e salt das senhas pelo mecanismo de autenticação do Django
-- Autenticação em dois fatores
+- Hash e salt das senhas (Django)
+- 2FA (TOTP)
 - Controle e expiração de sessões
 - Proteção contra tentativas excessivas de autenticação
-
-Previstos para as próximas etapas:
-
-- Hash seguro de senhas utilizando Argon2
-- Recuperação de senha por token temporário
-- Comunicação protegida por HTTPS/TLS
-- Registro e auditoria de eventos de segurança
+- Recuperação de senha por token HMAC temporário
+- Logs de solicitação, sucesso e falha da recuperação (sem senha/token)
 
 ## Privacidade e LGPD
 
@@ -110,8 +91,8 @@ Os documentos de requisitos e escopo fornecidos para o Projeto Integrador estão
 - Gabriel
 
 ## Entrega Atual
-
-- Release: https://github.com/sarahmazoni/Verbum/releases/tag/v1.1.0
+- Release: https://github.com/sarahmazoni/Verbum/releases/tag/v1.2.0
+- Documentação da etapa 2: docs/recuperacao-senha.md
 - Quadro Kanban: https://github.com/users/sarahmazoni/projects/1
 
 ## Status
